@@ -1,17 +1,56 @@
-name: Docker Action
-description:  Template Docker action
+name: Setup Binary Packages
+description:  GitHub Action to install Go/Rust binaries
 author: tj-actions
 inputs:
   token:
     description: 'GITHUB_TOKEN or a Repo scoped PAT'
     required: true
     default: ${{ github.token }}
+  repository_owner:
+    description: 'Repository owner where the binary is located'
+    required: false
+    default: ${{ github.repository_owner }}
+  repository:
+    description: 'Repository where the binary is located'
+    required: false
+    default: ${{ github.repository }}
+  version:
+    description: 'Version of the binary to install'
+    required: false
+    default: latest
+  language-type:
+    description: 'Language type of package to install: Go or Rust'
+    required: false
+    default: rust
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.token }}
+  using: 'composite'
+  steps:
+    - run: |
+        bash $GITHUB_ACTION_PATH/rust-install.sh
+      id: setup-bin
+      if: ${{ inputs.package-type == 'rust' }}
+      shell: bash
+      env:
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs
+        INPUT_TOKEN: ${{ inputs.token }}
+        INPUT_REPOSITORY_OWNER: ${{ inputs.repository_owner }}
+        INPUT_REPOSITORY: ${{ inputs.repository }}
+        INPUT_VERSION: ${{ inputs.version }}
+    - run: |
+        bash $GITHUB_ACTION_PATH/go-install.sh
+      id: setup-bin
+      if: ${{ inputs.package-type == 'go' }}
+      shell: bash
+      env:
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs
+        INPUT_TOKEN: ${{ inputs.token }}
+        INPUT_REPOSITORY_OWNER: ${{ inputs.repository_owner }}
+        INPUT_REPOSITORY: ${{ inputs.repository }}
+        INPUT_VERSION: ${{ inputs.version }}
+
 branding:
-  icon: check-square
+  icon: wrench
   color: white

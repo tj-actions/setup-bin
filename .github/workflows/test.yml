@@ -11,11 +11,25 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: Test docker-action
+    name: Test setup-bin
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: shellcheck
         uses: reviewdog/action-shellcheck@v1
-      - name: Run docker-action
+      - name: Run setup-bin go package
         uses: ./
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository_owner: tj-actions
+          repository: auto-doc
+          version: latest
+          package-type: go
+      - name: Run setup-bin rust package
+        uses: ./
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository_owner: tj-actions
+          repository: json2file
+          version: latest
+          package-type: rust
