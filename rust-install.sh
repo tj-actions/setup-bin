@@ -31,7 +31,7 @@ elif [[ $OS == "linux" ]]; then
     echo "Unsupported architecture: $ARCH"
     exit 1
   fi
-elif [[ $OS *= "mingw64" ]]; then
+elif [[ $OS == *"mingw64"* ]]; then
   FILENAME="${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
   URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
   SHA256SUM_FILE="${FILENAME}.sha256sum"
@@ -73,7 +73,7 @@ if [[ $OS == "darwin" ]]; then
   unzip "$OUTPUT_FILE" -d $TMPDIR
 elif [[ $OS == "linux" ]]; then
   tar -xzf "$OUTPUT_FILE" -C $TMPDIR
-elif [[ $OS *= "mingw64" ]]; then
+elif [[ $OS == *"mingw64"* ]]; then
   unzip "$OUTPUT_FILE" -d $TMPDIR
 else
   echo "Unsupported operating system: $OS"
