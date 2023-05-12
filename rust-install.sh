@@ -44,9 +44,9 @@ SHA256SUM_OUTPUT_FILE="$TMPDIR/$SHA256SUM_FILE"
 
 # Download the binary and its checksum file to the temporary directory
 echo "Downloading $URL"
-curl -v -H "Authorization: token $INPUT_TOKEN" --location --output "$OUTPUT_FILE" "$URL"
+curl --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$OUTPUT_FILE" "$URL"
 echo "Downloading $SHA256SUM_URL"
-curl -v -H "Authorization: token $INPUT_TOKEN" --location --output "$SHA256SUM_OUTPUT_FILE" "$URL.sha256sum"
+curl --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$SHA256SUM_OUTPUT_FILE" "$URL.sha256sum"
 
 # Verify the checksum
 shasum -a 256 -c "$SHA256SUM_OUTPUT_FILE"
