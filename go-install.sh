@@ -72,7 +72,18 @@ download "$SHA256SUM_OUTPUT_FILE" "$SHA256SUM_URL"
 
 # Verify the checksum
 EXPECTED=$(grep "$FILENAME" "$SHA256SUM_OUTPUT_FILE" | awk '{print $1}')
-ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+
+if [[ $OS == "darwin" ]]; then
+  ACTUAL=$(shasum -a 256 "$OUTPUT_FILE" | awk '{print $1}')
+elif [[ $OS == "linux" ]]; then
+  ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+elif [[ $OS == *"mingw64"* ]]; then
+  ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+else
+  echo "Unsupported operating system: $OS"
+  exit 1
+fi
+
 if [[ "$EXPECTED" != "$ACTUAL" ]]; then
   echo "Checksum verification failed"
   exit 1
