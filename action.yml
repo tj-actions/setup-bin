@@ -23,6 +23,11 @@ inputs:
     required: false
     default: rust
 
+outputs:
+  binary_path:
+    description: 'Path to the installed binary'
+    value: ${{ steps.setup-bin-rust.outputs.binary_path }} || ${{ steps.setup-bin-go.outputs.binary_path }}
+
 runs:
   using: 'composite'
   steps:
