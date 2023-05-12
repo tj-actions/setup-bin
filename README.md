@@ -4,7 +4,7 @@
 
 ## setup-bin
 
-GitHub action to download and install binary.
+GitHub action to download and install go and rust binaries from a github release.
 
 ```yaml
 ...
@@ -39,10 +39,6 @@ If you feel generous and want to show some extra appreciation:
 [buymeacoffee]: https://www.buymeacoffee.com/jackton1
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png
-
-## Features
-
-*   TODO
 
 ## Credits
 
