@@ -33,7 +33,7 @@ runs:
     - run: |
         bash $GITHUB_ACTION_PATH/rust-install.sh
       id: setup-bin-rust
-      if: ${{ inputs.package-type == 'rust' }}
+      if: ${{ inputs.language-type == 'rust' }}
       shell: bash
       env:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
@@ -45,7 +45,7 @@ runs:
     - run: |
         bash $GITHUB_ACTION_PATH/go-install.sh
       id: setup-bin-go
-      if: ${{ inputs.package-type == 'go' }}
+      if: ${{ inputs.language-type == 'go' }}
       shell: bash
       env:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
