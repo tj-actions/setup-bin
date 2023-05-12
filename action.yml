@@ -6,7 +6,7 @@ inputs:
     description: 'GITHUB_TOKEN or a Repo scoped PAT'
     required: true
     default: ${{ github.token }}
-  repository_owner:
+  repository-owner:
     description: 'Repository owner where the binary is located'
     required: false
     default: ${{ github.repository_owner }}
@@ -39,7 +39,7 @@ runs:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
         # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs
         INPUT_TOKEN: ${{ inputs.token }}
-        INPUT_REPOSITORY_OWNER: ${{ inputs.repository_owner }}
+        INPUT_REPOSITORY_OWNER: ${{ inputs.repository-owner }}
         INPUT_REPOSITORY: ${{ inputs.repository }}
         INPUT_VERSION: ${{ inputs.version }}
     - run: |
@@ -51,7 +51,7 @@ runs:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
         # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#example-specifying-inputs
         INPUT_TOKEN: ${{ inputs.token }}
-        INPUT_REPOSITORY_OWNER: ${{ inputs.repository_owner }}
+        INPUT_REPOSITORY_OWNER: ${{ inputs.repository-owner }}
         INPUT_REPOSITORY: ${{ inputs.repository }}
         INPUT_VERSION: ${{ inputs.version }}
 
