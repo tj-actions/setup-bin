@@ -15,6 +15,9 @@ GitHub action to download and install go and rust binaries from a github release
         uses: tj-actions/setup-bin@v1
         with:
           language-type: 'go'
+          repository-owner: [REPOSITORY_OWNER]
+          repository: [REPOSITORY]
+          
       - name: Show output
         run: |
           echo "setup-bin-go: ${{ steps.setup-bin-go.outputs.binary_path }}"
