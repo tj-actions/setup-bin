@@ -28,7 +28,7 @@ runs:
   steps:
     - run: |
         bash $GITHUB_ACTION_PATH/rust-install.sh
-      id: setup-bin
+      id: setup-bin-rust
       if: ${{ inputs.package-type == 'rust' }}
       shell: bash
       env:
@@ -40,7 +40,7 @@ runs:
         INPUT_VERSION: ${{ inputs.version }}
     - run: |
         bash $GITHUB_ACTION_PATH/go-install.sh
-      id: setup-bin
+      id: setup-bin-go
       if: ${{ inputs.package-type == 'go' }}
       shell: bash
       env:
