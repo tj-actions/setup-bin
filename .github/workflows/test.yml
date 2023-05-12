@@ -38,3 +38,6 @@ jobs:
           repository: json2file
           version: latest
           language-type: rust
+      - name: Show output
+        run: |
+          echo "setup-bin-rust: ${{ steps.setup-bin-rust.outputs.binary_path }}"
