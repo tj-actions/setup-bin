@@ -48,7 +48,9 @@ else
 fi
 
 # Download the binary and its checksum file to the temporary directory
+echo "Downloading $URL"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$FILENAME $URL
+echo "Downloading $SHA256SUM_URL"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$SHA256SUM_FILE $SHA256SUM_URL
 
 # Verify the checksum
