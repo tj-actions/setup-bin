@@ -14,7 +14,7 @@ GitHub action to download and install go and rust binaries from a github release
         id: serup-bin-go
         uses: tj-actions/setup-bin@v1
         with:
-          language-type: 'rust'
+          language-type: 'go'
       - name: Show output
         run: |
           echo "setup-bin-go: ${{ steps.setup-bin-go.outputs.binary_path }}"
