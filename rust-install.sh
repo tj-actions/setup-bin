@@ -45,8 +45,6 @@ curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --
 echo "Downloading $URL.sha256sum"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$SHA256SUM_FILE $URL.sha256sum
 
-ls $TMPDIR
-
 # Verify the checksum
 shasum -a 256 -c $TMPDIR/$SHA256SUM_FILE
 

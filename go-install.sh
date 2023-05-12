@@ -13,18 +13,20 @@ else
   VERSION=$INPUT_VERSION
 fi
 
+NAME_VERSION=${VERSION#"v"}
+
 # Determine the operating system and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
 
 if [[ $OS == "darwin" ]]; then
-  FILENAME="${INPUT_REPOSITORY}_${VERSION}_Darwin_x86_64.tar.gz"
+  FILENAME="${INPUT_REPOSITORY}_${NAME_VERSION}_Darwin_x86_64.tar.gz"
   URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
   SHA256SUM_FILE="checksums.txt"
   SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
 elif [[ $OS == "linux" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
-    FILENAME="${INPUT_REPOSITORY}_${VERSION}_Linux_x86_64.tar.gz"
+    FILENAME="${INPUT_REPOSITORY}_${NAME_VERSION}_Linux_x86_64.tar.gz"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
     SHA256SUM_FILE="checksums.txt"
     SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
@@ -34,7 +36,7 @@ elif [[ $OS == "linux" ]]; then
   fi
 elif [[ $OS == "windows" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
-    FILENAME="${INPUT_REPOSITORY}_${VERSION}_Windows_x86_64.zip"
+    FILENAME="${INPUT_REPOSITORY}_${NAME_VERSION}_Windows_x86_64.zip"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
     SHA256SUM_FILE="checksums.txt"
     SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
@@ -52,8 +54,6 @@ echo "Downloading $URL"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$FILENAME $URL
 echo "Downloading $SHA256SUM_URL"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$SHA256SUM_FILE $SHA256SUM_URL
-
-ls $TMPDIR
 
 # Verify the checksum
 EXPECTED=$(grep "$FILENAME" $TMPDIR/$SHA256SUM_FILE | awk '{print $1}')
