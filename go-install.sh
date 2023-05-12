@@ -35,7 +35,7 @@ elif [[ $OS == "linux" ]]; then
     echo "Unsupported architecture: $ARCH"
     exit 1
   fi
-elif [[ $OS *= "mingw64" || $OS == "windows" ]]; then
+elif [[ $OS *= "mingw64" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     FILENAME="${INPUT_REPOSITORY}_${NAME_VERSION}_Windows_x86_64.zip"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
@@ -83,7 +83,7 @@ if [[ $OS == "darwin" ]]; then
   tar -xzf "$OUTPUT_FILE" -C $TMPDIR
 elif [[ $OS == "linux" ]]; then
   tar -xzf "$OUTPUT_FILE" -C $TMPDIR
-elif [[ $OS == "windows" ]]; then
+elif [[ $OS *= "mingw64" ]]; then
   unzip "$OUTPUT_FILE" -d $TMPDIR
 else
   echo "Unsupported operating system: $OS"
