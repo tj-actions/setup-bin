@@ -13,7 +13,7 @@ GitHub action to download and install go and rust binaries from a github release
       - name: Setup bin
         uses: tj-actions/setup-bin@v1
         with:
-          package-type: 'rust'
+          language-type: 'rust'
 ```
 
 ## Inputs
