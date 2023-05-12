@@ -4,16 +4,14 @@ author: tj-actions
 inputs:
   token:
     description: 'GITHUB_TOKEN or a Repo scoped PAT'
-    required: true
+    required: false
     default: ${{ github.token }}
   repository-owner:
     description: 'Repository owner where the binary is located'
-    required: false
-    default: ${{ github.repository_owner }}
+    required: true
   repository:
     description: 'Repository where the binary is located'
-    required: false
-    default: ${{ github.repository }}
+    required: true
   version:
     description: 'Version of the binary to install'
     required: false
