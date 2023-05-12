@@ -28,7 +28,7 @@ GitHub action to download and install go and rust binaries from a github release
 |------------------|--------|----------|------------------------------------|--------------------------------------------------------|
 |  language-type   | string |   true   |                                    | Language type of package to<br>install: `rust` or `go` |
 |    repository    | string |  false   |    `"${{ github.repository }}"`    |       Repository where the binary is<br>located        |
-| repository\_owner | string |  false   | `"${{ github.repository_owner }}"` |    Repository owner where the binary<br>is located     |
+| repository-owner | string |  false   | `"${{ github.repository_owner }}"` |    Repository owner where the binary<br>is located     |
 |      token       | string |   true   |      `"${{ github.token }}"`       |          GITHUB\_TOKEN or a Repo scoped<br>PAT          |
 |     version      | string |  false   |             `"latest"`             |          Version of the binary to<br>install           |
 
