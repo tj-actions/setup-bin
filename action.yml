@@ -19,7 +19,7 @@ inputs:
     required: false
     default: latest
   language-type:
-    description: 'Language type of package to install: Go or Rust'
+    description: 'Language type of package to install: `rust` or `go`'
     required: false
     default: rust
 
