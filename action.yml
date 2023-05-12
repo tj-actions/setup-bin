@@ -56,5 +56,5 @@ runs:
         INPUT_VERSION: ${{ inputs.version }}
 
 branding:
-  icon: wrench
+  icon: arrow-down-circle
   color: white
