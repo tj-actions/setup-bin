@@ -11,10 +11,10 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
   VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/latest" | jq -r '.tag_name')
 else
   echo "Downloading version $INPUT_VERSION"
-  VERSION=$INPUT_VERSION
+  VERSION="$INPUT_VERSION"
 fi
 
-NAME_VERSION=${VERSION#"v"}
+NAME_VERSION="${VERSION#"v"}"
 
 # Determine the operating system and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -35,7 +35,7 @@ elif [[ $OS == "linux" ]]; then
     echo "Unsupported architecture: $ARCH"
     exit 1
   fi
-elif [[ $OS == "windows" ]]; then
+elif [[ $OS *= "mingw64" || $OS == "windows" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     FILENAME="${INPUT_REPOSITORY}_${NAME_VERSION}_Windows_x86_64.zip"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
@@ -91,7 +91,7 @@ else
 fi
 
 # Make the binary executable
-chmod +x $TMPDIR/$INPUT_REPOSITORY
+chmod +x "$TMPDIR"/"$INPUT_REPOSITORY"
 
 # Return the binary path
-echo "binary_path=$TMPDIR/$INPUT_REPOSITORY" >> $GITHUB_OUTPUT
+echo "binary_path=$TMPDIR/$INPUT_REPOSITORY" >> "$GITHUB_OUTPUT"
