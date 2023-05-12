@@ -18,18 +18,23 @@ jobs:
       - name: shellcheck
         uses: reviewdog/action-shellcheck@v1
       - name: Run setup-bin go package
+        id: setup-bin-go
         uses: ./
         with:
           token: ${{ secrets.PAT_TOKEN }}
           repository_owner: tj-actions
           repository: auto-doc
           version: latest
-          package-type: go
+          language-type: go
+      - name: Show output
+        run: |
+          echo "setup-bin-go: ${{ steps.setup-bin-go.outputs.binary_path }}"
       - name: Run setup-bin rust package
+        id: setup-bin-rust
         uses: ./
         with:
           token: ${{ secrets.PAT_TOKEN }}
           repository_owner: tj-actions
           repository: json2file
           version: latest
-          package-type: rust
+          language-type: rust

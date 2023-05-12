@@ -18,13 +18,13 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
 
 if [[ $OS == "darwin" ]]; then
-  FILENAME="$INPUT_REPOSITORY_${VERSION}_Darwin_x86_64.tar.gz"
+  FILENAME="${INPUT_REPOSITORY}_${VERSION}_Darwin_x86_64.tar.gz"
   URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
   SHA256SUM_FILE="checksums.txt"
   SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
 elif [[ $OS == "linux" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
-    FILENAME="$INPUT_REPOSITORY_${VERSION}_Linux_x86_64.tar.gz"
+    FILENAME="${INPUT_REPOSITORY}_${VERSION}_Linux_x86_64.tar.gz"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
     SHA256SUM_FILE="checksums.txt"
     SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
@@ -34,7 +34,7 @@ elif [[ $OS == "linux" ]]; then
   fi
 elif [[ $OS == "windows" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
-    FILENAME="$INPUT_REPOSITORY_${VERSION}_Windows_x86_64.zip"
+    FILENAME="${INPUT_REPOSITORY}_${VERSION}_Windows_x86_64.zip"
     URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
     SHA256SUM_FILE="checksums.txt"
     SHA256SUM_URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${SHA256SUM_FILE}"
