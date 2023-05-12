@@ -49,7 +49,12 @@ echo "Downloading $URL.sha256sum"
 curl --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$SHA256SUM_OUTPUT_FILE" "$URL.sha256sum"
 
 # Verify the checksum
-shasum -a 256 -c "$SHA256SUM_OUTPUT_FILE"
+EXPECTED=$(grep "$FILENAME" "$SHA256SUM_OUTPUT_FILE" | awk '{print $1}')
+ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+if [[ "$EXPECTED" != "$ACTUAL" ]]; then
+  echo "Checksum verification failed"
+  exit 1
+fi
 
 # Extract the binary in the temporary directory
 if [[ $OS == "darwin" ]]; then
