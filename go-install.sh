@@ -52,11 +52,22 @@ fi
 OUTPUT_FILE="$TMPDIR/$FILENAME"
 SHA256SUM_OUTPUT_FILE="$TMPDIR/$SHA256SUM_FILE"
 
+function download {
+    local output=$1
+    local url=$2
+
+    for i in $(seq 1 5); do
+      curl --fail --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$output" "$url" && break
+      sleep 10
+      echo "$i retries"
+    done
+}
+
 # Download the binary and its checksum file to the temporary directory
 echo "Downloading $URL"
-curl --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$OUTPUT_FILE" "$URL"
+download "$OUTPUT_FILE" "$URL"
 echo "Downloading $SHA256SUM_URL"
-curl --silent -H "Authorization: token $INPUT_TOKEN" --location --output "$SHA256SUM_OUTPUT_FILE" "$SHA256SUM_URL"
+download "$SHA256SUM_OUTPUT_FILE" "$SHA256SUM_URL"
 
 # Verify the checksum
 EXPECTED=$(grep "$FILENAME" "$SHA256SUM_OUTPUT_FILE" | awk '{print $1}')
