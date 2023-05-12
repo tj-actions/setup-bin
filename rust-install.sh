@@ -8,10 +8,10 @@ INPUT_REPOSITORY=$(basename "$INPUT_REPOSITORY")
 if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
   # Set the latest release version
-  VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
+  VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/latest" | jq -r '.tag_name')
 else
   echo "Downloading version $INPUT_VERSION"
-  VERSION=$INPUT_VERSION
+  VERSION="$INPUT_VERSION"
 fi
 
 # Determine the operating system and architecture
@@ -31,7 +31,7 @@ elif [[ $OS == "linux" ]]; then
     echo "Unsupported architecture: $ARCH"
     exit 1
   fi
-elif [[ $OS == "windows" ]]; then
+elif [[ $OS == *"mingw64"* ]]; then
   FILENAME="${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
   URL="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}/${FILENAME}"
   SHA256SUM_FILE="${FILENAME}.sha256sum"
@@ -62,7 +62,18 @@ download "$SHA256SUM_OUTPUT_FILE" "$URL.sha256sum"
 
 # Verify the checksum
 EXPECTED=$(grep "$FILENAME" "$SHA256SUM_OUTPUT_FILE" | awk '{print $1}')
-ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+
+if [[ $OS == "darwin" ]]; then
+  ACTUAL=$(shasum -a 256 "$OUTPUT_FILE" | awk '{print $1}')
+elif [[ $OS == "linux" ]]; then
+  ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+elif [[ $OS == *"mingw64"* ]]; then
+  ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
+else
+  echo "Unsupported operating system: $OS"
+  exit 1
+fi
+
 if [[ "$EXPECTED" != "$ACTUAL" ]]; then
   echo "Checksum verification failed"
   exit 1
@@ -70,18 +81,18 @@ fi
 
 # Extract the binary in the temporary directory
 if [[ $OS == "darwin" ]]; then
-  unzip "$OUTPUT_FILE" -d $TMPDIR
+  unzip "$OUTPUT_FILE" -d "$TMPDIR"
 elif [[ $OS == "linux" ]]; then
-  tar -xzf "$OUTPUT_FILE" -C $TMPDIR
-elif [[ $OS == "windows" ]]; then
-  unzip "$OUTPUT_FILE" -d $TMPDIR
+  tar -xzf "$OUTPUT_FILE" -C "$TMPDIR"
+elif [[ $OS == *"mingw64"* ]]; then
+  unzip "$OUTPUT_FILE" -d "$TMPDIR"
 else
   echo "Unsupported operating system: $OS"
   exit 1
 fi
 
 # Make the binary executable
-chmod +x $TMPDIR/$INPUT_REPOSITORY
+chmod +x "$TMPDIR"/"$INPUT_REPOSITORY"
 
 # Return the binary path
-echo "binary_path=$TMPDIR/$INPUT_REPOSITORY" >> $GITHUB_OUTPUT
+echo "binary_path=$TMPDIR/$INPUT_REPOSITORY" >> "$GITHUB_OUTPUT"
