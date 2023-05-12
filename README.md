@@ -11,6 +11,7 @@ GitHub action to download and install go and rust binaries from a github release
     steps:
       - uses: actions/checkout@v2
       - name: Setup bin
+        id: serup-bin-go
         uses: tj-actions/setup-bin@v1
         with:
           language-type: 'rust'
