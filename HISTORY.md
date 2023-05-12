@@ -1,5 +1,18 @@
 # Changelog
 
+# [1.1.3](https://github.com/tj-actions/setup-bin/compare/v1.1.2...v1.1.3) - (2023-05-12)
+
+## <!-- 26 -->🔄 Update
+
+- Update README.md ([0d06100](https://github.com/tj-actions/setup-bin/commit/0d0610045dbd240bac1d9a50a49069562b57877f))  - (Tonye Jack)
+- Update action.yml ([b61145e](https://github.com/tj-actions/setup-bin/commit/b61145e077ac52a3d466756ae00bf7ceba24ebef))  - (Tonye Jack)
+
+## <!-- 9 -->⬆️ Upgrades
+
+- Upgraded to v1.1.2 ([#12](https://github.com/tj-actions/setup-bin/issues/12))
+
+Co-authored-by: jackton1 <jackton1@users.noreply.github.com> ([b2af30e](https://github.com/tj-actions/setup-bin/commit/b2af30ec1a1991a74635de2f3066e1301c16ef14))  - (Tonye Jack)
+
 # [1.1.2](https://github.com/tj-actions/setup-bin/compare/v1.1.1...v1.1.2) - (2023-05-12)
 
 ## <!-- 26 -->🔄 Update
