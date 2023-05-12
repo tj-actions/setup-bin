@@ -55,6 +55,8 @@ curl -v -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output
 echo "Downloading $SHA256SUM_URL"
 curl -v -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$SHA256SUM_FILE $SHA256SUM_URL
 
+ls -al $TMPDIR
+
 # Verify the checksum
 EXPECTED=$(grep "$FILENAME" $TMPDIR/$SHA256SUM_FILE | awk '{print $1}')
 ACTUAL=$(sha256sum $TMPDIR/$FILENAME | awk '{print $1}')
