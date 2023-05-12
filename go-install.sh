@@ -80,11 +80,11 @@ fi
 
 # Extract the binary in the temporary directory
 if [[ $OS == "darwin" ]]; then
-  tar -xzf "$OUTPUT_FILE" -C $TMPDIR
+  tar -xzf "$OUTPUT_FILE" -C "$TMPDIR"
 elif [[ $OS == "linux" ]]; then
-  tar -xzf "$OUTPUT_FILE" -C $TMPDIR
+  tar -xzf "$OUTPUT_FILE" -C "$TMPDIR"
 elif [[ $OS == *"mingw64"* ]]; then
-  unzip "$OUTPUT_FILE" -d $TMPDIR
+  unzip "$OUTPUT_FILE" -d "$TMPDIR"
 else
   echo "Unsupported operating system: $OS"
   exit 1
