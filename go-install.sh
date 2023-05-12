@@ -3,6 +3,7 @@
 set -eou pipefail
 
 TMPDIR=$(mktemp -d)
+INPUT_REPOSITORY=$(basename "$INPUT_REPOSITORY")
 
 if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
