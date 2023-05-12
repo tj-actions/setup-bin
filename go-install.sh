@@ -9,7 +9,6 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
   # Set the latest release version
   VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/latest" | jq -r '.tag_name')
-)
 else
   echo "Downloading version $INPUT_VERSION"
   VERSION=$INPUT_VERSION
