@@ -49,17 +49,18 @@ else
   exit 1
 fi
 
+OUTPUT_FILE="$TMPDIR/$FILENAME"
+SHA256SUM_OUTPUT_FILE="$TMPDIR/$SHA256SUM_FILE"
+
 # Download the binary and its checksum file to the temporary directory
 echo "Downloading $URL"
-curl -v -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$FILENAME $URL
+curl -v -H "Authorization: token $INPUT_TOKEN" --location --output "$OUTPUT_FILE" "$URL"
 echo "Downloading $SHA256SUM_URL"
-curl -v -H "Authorization: token $INPUT_TOKEN" --location --remote-name --output $TMPDIR/$SHA256SUM_FILE $SHA256SUM_URL
-
-ls -al $TMPDIR
+curl -v -H "Authorization: token $INPUT_TOKEN" --location --output "$SHA256SUM_OUTPUT_FILE" "$SHA256SUM_URL"
 
 # Verify the checksum
-EXPECTED=$(grep "$FILENAME" $TMPDIR/$SHA256SUM_FILE | awk '{print $1}')
-ACTUAL=$(sha256sum $TMPDIR/$FILENAME | awk '{print $1}')
+EXPECTED=$(grep "$FILENAME" "$SHA256SUM_OUTPUT_FILE" | awk '{print $1}')
+ACTUAL=$(sha256sum "$OUTPUT_FILE" | awk '{print $1}')
 if [[ "$EXPECTED" != "$ACTUAL" ]]; then
   echo "Checksum verification failed"
   exit 1
@@ -67,11 +68,11 @@ fi
 
 # Extract the binary in the temporary directory
 if [[ $OS == "darwin" ]]; then
-  tar -xzf $TMPDIR/$FILENAME -C $TMPDIR
+  tar -xzf "$OUTPUT_FILE" -C $TMPDIR
 elif [[ $OS == "linux" ]]; then
-  tar -xzf $TMPDIR/$FILENAME -C $TMPDIR
+  tar -xzf "$OUTPUT_FILE" -C $TMPDIR
 elif [[ $OS == "windows" ]]; then
-  unzip $TMPDIR/$FILENAME -d $TMPDIR
+  unzip "$OUTPUT_FILE" -d $TMPDIR
 else
   echo "Unsupported operating system: $OS"
   exit 1
