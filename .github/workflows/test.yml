@@ -26,6 +26,7 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.PAT_TOKEN }}
+          repository-owner: tj-actions
           repository: auto-doc
           language-type: go
       - name: Show output
@@ -36,6 +37,7 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.PAT_TOKEN }}
+          repository-owner: tj-actions
           repository: json2file
           language-type: rust
       - name: Show output
