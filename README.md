@@ -4,7 +4,7 @@
 
 ## setup-bin
 
-GitHub action to download and install go and rust binaries from a github release artifacts created by [goreleaser-action](https://github.com/goreleaser/goreleaser-action) or [rust-build.action](https://github.com/rust-build/rust-build.action).
+GitHub action to download and install go and rust binaries from github release artifacts created by [goreleaser-action](https://github.com/goreleaser/goreleaser-action) or [rust-build.action](https://github.com/rust-build/rust-build.action).
 
 ```yaml
 ...
