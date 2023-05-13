@@ -27,13 +27,13 @@ GitHub action to download and install go and rust binaries from a github release
 
 <!-- AUTO-DOC-INPUT:START - Do not remove or modify this section -->
 
-|      INPUT       |  TYPE  | REQUIRED |              DEFAULT               |                      DESCRIPTION                       |
-|------------------|--------|----------|------------------------------------|--------------------------------------------------------|
-|  language-type   | string |   true   |                                    | Language type of package to<br>install: `rust` or `go` |
-|    repository    | string |  false   |    `"${{ github.repository }}"`    |       Repository where the binary is<br>located        |
-| repository-owner | string |  false   | `"${{ github.repository_owner }}"` |    Repository owner where the binary<br>is located     |
-|      token       | string |   true   |      `"${{ github.token }}"`       |          GITHUB\_TOKEN or a Repo scoped<br>PAT          |
-|     version      | string |  false   |             `"latest"`             |          Version of the binary to<br>install           |
+|      INPUT       |  TYPE  | REQUIRED |         DEFAULT         |                       DESCRIPTION                        |
+|------------------|--------|----------|-------------------------|----------------------------------------------------------|
+|  language-type   | string |   true   |                         | Language type of package to <br>install: `rust` or `go`  |
+|    repository    | string |   true   |                         |       Repository where the binary is <br>located         |
+| repository-owner | string |   true   |                         |    Repository owner where the binary <br>is located      |
+|      token       | string |  false   | `"${{ github.token }}"` |          GITHUB\_TOKEN or a Repo scoped <br>PAT           |
+|     version      | string |  false   |       `"latest"`        |          Version of the binary to <br>install            |
 
 <!-- AUTO-DOC-INPUT:END -->
 
