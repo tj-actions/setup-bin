@@ -39,6 +39,14 @@ GitHub action to download and install go and rust binaries from github release a
 
 ## Outputs
 
+<!-- AUTO-DOC-OUTPUT:START - Do not remove or modify this section -->
+
+|   OUTPUT    |  TYPE  |         DESCRIPTION          |
+|-------------|--------|------------------------------|
+| binary\_path | string | Path to the installed binary |
+
+<!-- AUTO-DOC-OUTPUT:END -->
+
 *   Free software: [MIT license](LICENSE)
 
 If you feel generous and want to show some extra appreciation:
