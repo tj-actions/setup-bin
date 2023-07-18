@@ -1,5 +1,44 @@
 # Changelog
 
+# [1.1.4](https://github.com/tj-actions/setup-bin/compare/v1.1.3...v1.1.4) - (2023-07-05)
+
+## <!-- 17 -->➖ Remove
+
+- Deleted .github/workflows/auto-merge.yml ([c0e379e](https://github.com/tj-actions/setup-bin/commit/c0e379e45d9e132a57ebdbc472ed8bc9c7f1029c))  - (Tonye Jack)
+
+## <!-- 26 -->🔄 Update
+
+- Updated renovate.json ([e4e63b2](https://github.com/tj-actions/setup-bin/commit/e4e63b2acb4aea0b9a3a2a0d69efe3c5d7cd7dbd))  - (Tonye Jack)
+- Updated README.md
+ ([71b63f3](https://github.com/tj-actions/setup-bin/commit/71b63f39d78b11b5047b2ec2f40ac08aa4726fdf))  - (jackton1)
+- Update README.md ([4c21429](https://github.com/tj-actions/setup-bin/commit/4c214295298b69294768b37bd5e695832af67695))  - (Tonye Jack)
+- Update README.md ([a07d8ea](https://github.com/tj-actions/setup-bin/commit/a07d8ea0fc19ed981532a640ab609ab3bd094dae))  - (Tonye Jack)
+- Update README.md ([#15](https://github.com/tj-actions/setup-bin/issues/15))
+
+ ([a8b13db](https://github.com/tj-actions/setup-bin/commit/a8b13db69df6b92be93f0fca62ec617d4baca129))  - (Tonye Jack)
+- Updated README.md
+ ([e031bfe](https://github.com/tj-actions/setup-bin/commit/e031bfef72a1bd0bc38c2bd4e31eb91613f480cf))  - (jackton1)
+- Update test.yml ([66f7232](https://github.com/tj-actions/setup-bin/commit/66f7232929a2c1f52f77f840b0626163f108db44))  - (Tonye Jack)
+
+## <!-- 30 -->📝 Other
+
+- PR [#19](https://github.com/tj-actions/setup-bin/pull/19): update tj-actions/verify-changed-files action to v16 ([e3b1946](https://github.com/tj-actions/setup-bin/commit/e3b19464ff3b9a732726ca09d8793047574833db))  - (repo-ranger[bot])
+- PR [#18](https://github.com/tj-actions/setup-bin/pull/18): README.md ([150f8e1](https://github.com/tj-actions/setup-bin/commit/150f8e1bb57ae85eaa2000c044467a2b233a7fae))  - (repo-ranger[bot])
+- PR [#16](https://github.com/tj-actions/setup-bin/pull/16): update tj-actions/verify-changed-files action to v15 ([0859276](https://github.com/tj-actions/setup-bin/commit/08592766ad0e138d96c8e4363fb8515e48d32cba))  - (repo-ranger[bot])
+- PR [#13](https://github.com/tj-actions/setup-bin/pull/13): to v1.1.3 ([b4e38e3](https://github.com/tj-actions/setup-bin/commit/b4e38e3bc95fdfe7fd9722feb662486d0e8e8f77))  - (repo-ranger[bot])
+- Merge branch 'main' into upgrade-to-v1.1.3 ([867a684](https://github.com/tj-actions/setup-bin/commit/867a6847e9a889504897afea5261d200391ab1d9))  - (repo-ranger[bot])
+- PR [#14](https://github.com/tj-actions/setup-bin/pull/14): README.md ([c62a73b](https://github.com/tj-actions/setup-bin/commit/c62a73b7a3a04873c47e0f88fa7bcef4e8196a3b))  - (repo-ranger[bot])
+
+## <!-- 7 -->⚙️ Miscellaneous Tasks
+
+- **deps:** Update tj-actions/verify-changed-files action to v16 ([6997db6](https://github.com/tj-actions/setup-bin/commit/6997db6ee215d4a80fe29345a5de2630cb5d5d9c))  - (renovate[bot])
+- **deps:** Update tj-actions/verify-changed-files action to v15 ([b064125](https://github.com/tj-actions/setup-bin/commit/b064125eeffc36cbe5feb959e389390aac2882c5))  - (renovate[bot])
+
+## <!-- 9 -->⬆️ Upgrades
+
+- Upgraded from v1.1.2 -> v1.1.3
+ ([0b7bdfd](https://github.com/tj-actions/setup-bin/commit/0b7bdfd11ace8691333db1918b2ba4389fde41f1))  - (jackton1)
+
 # [1.1.3](https://github.com/tj-actions/setup-bin/compare/v1.1.2...v1.1.3) - (2023-05-12)
 
 ## <!-- 26 -->🔄 Update
