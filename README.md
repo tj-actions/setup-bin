@@ -27,13 +27,13 @@ GitHub action to download and install go and rust binaries from github release a
 
 <!-- AUTO-DOC-INPUT:START - Do not remove or modify this section -->
 
-|      INPUT       |  TYPE  | REQUIRED |         DEFAULT         |                       DESCRIPTION                        |
-|------------------|--------|----------|-------------------------|----------------------------------------------------------|
-|  language-type   | string |   true   |                         | Language type of package to <br>install: `rust` or `go`  |
-|    repository    | string |   true   |                         |       Repository where the binary is <br>located         |
-| repository-owner | string |   true   |                         |    Repository owner where the binary <br>is located      |
-|      token       | string |  false   | `"${{ github.token }}"` |          GITHUB\_TOKEN or a Repo scoped <br>PAT           |
-|     version      | string |  false   |       `"latest"`        |          Version of the binary to <br>install            |
+|                                      INPUT                                       |  TYPE  | REQUIRED |         DEFAULT         |                       DESCRIPTION                        |
+|----------------------------------------------------------------------------------|--------|----------|-------------------------|----------------------------------------------------------|
+|     <a name="input_language-type"></a>[language-type](#input_language-type)      | string |   true   |                         | Language type of package to <br>install: `rust` or `go`  |
+|          <a name="input_repository"></a>[repository](#input_repository)          | string |   true   |                         |       Repository where the binary is <br>located         |
+| <a name="input_repository-owner"></a>[repository-owner](#input_repository-owner) | string |   true   |                         |    Repository owner where the binary <br>is located      |
+|                 <a name="input_token"></a>[token](#input_token)                  | string |  false   | `"${{ github.token }}"` |          GITHUB\_TOKEN or a Repo scoped <br>PAT           |
+|              <a name="input_version"></a>[version](#input_version)               | string |  false   |       `"latest"`        |          Version of the binary to <br>install            |
 
 <!-- AUTO-DOC-INPUT:END -->
 
@@ -41,9 +41,9 @@ GitHub action to download and install go and rust binaries from github release a
 
 <!-- AUTO-DOC-OUTPUT:START - Do not remove or modify this section -->
 
-|   OUTPUT    |  TYPE  |         DESCRIPTION          |
-|-------------|--------|------------------------------|
-| binary\_path | string | Path to the installed binary |
+|                               OUTPUT                                |  TYPE  |         DESCRIPTION          |
+|---------------------------------------------------------------------|--------|------------------------------|
+| <a name="output_binary_path"></a>[binary\_path](#output_binary_path) | string | Path to the installed binary |
 
 <!-- AUTO-DOC-OUTPUT:END -->
 
