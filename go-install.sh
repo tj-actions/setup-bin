@@ -9,6 +9,11 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
   # Set the latest release version
   VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/latest" | jq -r '.tag_name')
+
+  # If the version is in the format like "v3", find the latest semver
+  if [[ $VERSION =~ ^v[0-9]+$ ]]; then
+    VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases" | jq -r '[.[] | .tag_name] | sort | reverse | .[0]')
+  fi
 else
   echo "Downloading version $INPUT_VERSION"
   VERSION="$INPUT_VERSION"
