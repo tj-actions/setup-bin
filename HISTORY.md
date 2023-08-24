@@ -1,5 +1,30 @@
 # Changelog
 
+# [1.2.0](https://github.com/tj-actions/setup-bin/compare/v1.1.4...v1.2.0) - (2023-08-24)
+
+## <!-- 26 -->🔄 Update
+
+- Update test.yml ([497614c](https://github.com/tj-actions/setup-bin/commit/497614cd8a170ebfa36f57493171dc37e367919f))  - (Tonye Jack)
+- Update go-install.sh ([584a880](https://github.com/tj-actions/setup-bin/commit/584a880ed4efab1191a2fddd90cbf1bee3b99804))  - (Tonye Jack)
+- Updated README.md
+ ([82e8f29](https://github.com/tj-actions/setup-bin/commit/82e8f29e0644bcdaf7374c85c3b605ded11541dc))  - (repo-ranger[bot])
+- Update test.yml ([c229b8d](https://github.com/tj-actions/setup-bin/commit/c229b8dcb10ddbf89738e878d59346b09b2c1316))  - (Tonye Jack)
+
+## <!-- 30 -->📝 Other
+
+- PR [#22](https://github.com/tj-actions/setup-bin/pull/22): README.md ([92b6a4f](https://github.com/tj-actions/setup-bin/commit/92b6a4f5a7970a51df85d0e14721418fa7039624))  - (repo-ranger[bot])
+- PR [#21](https://github.com/tj-actions/setup-bin/pull/21): update tj-actions/auto-doc action to v3 ([49ba31c](https://github.com/tj-actions/setup-bin/commit/49ba31cd4bf80676dc44839946fd26d708f1a24c))  - (repo-ranger[bot])
+- PR [#20](https://github.com/tj-actions/setup-bin/pull/20): to v1.1.4 ([f571346](https://github.com/tj-actions/setup-bin/commit/f571346d3b794ecb2e9521d543ac0390c3ad89a0))  - (repo-ranger[bot])
+
+## <!-- 7 -->⚙️ Miscellaneous Tasks
+
+- **deps:** Update tj-actions/auto-doc action to v3 ([fa6d601](https://github.com/tj-actions/setup-bin/commit/fa6d601687a55f857359775c6cff746004ce5810))  - (renovate[bot])
+
+## <!-- 9 -->⬆️ Upgrades
+
+- Upgraded from v1.1.3 -> v1.1.4
+ ([cc157b6](https://github.com/tj-actions/setup-bin/commit/cc157b6875adce94560985b820d389430a4793f2))  - (jackton1)
+
 # [1.1.4](https://github.com/tj-actions/setup-bin/compare/v1.1.3...v1.1.4) - (2023-07-05)
 
 ## <!-- 17 -->➖ Remove
