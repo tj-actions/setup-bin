@@ -1,5 +1,44 @@
 # Changelog
 
+# [1.2.1](https://github.com/tj-actions/setup-bin/compare/v1.2.0...v1.2.1) - (2023-09-24)
+
+## <!-- 13 -->📦 Bumps
+
+- Bump actions/checkout from 4.0.0 to 4.1.0 ([#27](https://github.com/tj-actions/setup-bin/issues/27))
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+ ([cc2f416](https://github.com/tj-actions/setup-bin/commit/cc2f416f28163075dc4d67e8b298dcbe2ecf4d5a))  - (dependabot[bot])
+
+## <!-- 16 -->➕ Add
+
+- Added .github/FUNDING.yml ([019ca96](https://github.com/tj-actions/setup-bin/commit/019ca960c69fa8a925fb6edd1e9d05fe74a29862))  - (Tonye Jack)
+
+## <!-- 17 -->➖ Remove
+
+- Deleted .github/ISSUE_TEMPLATE/feature_request.yaml ([5fda0ff](https://github.com/tj-actions/setup-bin/commit/5fda0ff1293ae6aa69f6a0c0c6953722ed740f78))  - (Tonye Jack)
+- Deleted .github/ISSUE_TEMPLATE/bug_report.yaml ([10eaf20](https://github.com/tj-actions/setup-bin/commit/10eaf204c92152b33bc76707cf3457174c637765))  - (Tonye Jack)
+- Deleted .github/FUNDING.yml ([15d2b3a](https://github.com/tj-actions/setup-bin/commit/15d2b3ad543b2dbfff53bb5c66f02d99b7b20e30))  - (Tonye Jack)
+
+## <!-- 26 -->🔄 Update
+
+- Update test.yml ([28dffaa](https://github.com/tj-actions/setup-bin/commit/28dffaad8fb50f56ca1606531f7fbb22877be416))  - (Tonye Jack)
+
+## <!-- 30 -->📝 Other
+
+- PR [#25](https://github.com/tj-actions/setup-bin/pull/25): update actions/checkout action to v4 ([90d9b84](https://github.com/tj-actions/setup-bin/commit/90d9b849491912dd3d0696cf9c9595684cca8f03))  - (repo-ranger[bot])
+- PR [#24](https://github.com/tj-actions/setup-bin/pull/24): update tj-actions/release-tagger action to v4 ([c901bd8](https://github.com/tj-actions/setup-bin/commit/c901bd852de320a18680fc74407028cca55b0c80))  - (repo-ranger[bot])
+- PR [#23](https://github.com/tj-actions/setup-bin/pull/23): to v1.2.0 ([1868ec6](https://github.com/tj-actions/setup-bin/commit/1868ec66c5a31215ae63671b51c1dd7bd89457aa))  - (repo-ranger[bot])
+
+## <!-- 7 -->⚙️ Miscellaneous Tasks
+
+- **deps:** Update actions/checkout action to v4 ([124de24](https://github.com/tj-actions/setup-bin/commit/124de2462b760f0ce12a47020cca8578042805bf))  - (renovate[bot])
+- **deps:** Update tj-actions/release-tagger action to v4 ([928d96d](https://github.com/tj-actions/setup-bin/commit/928d96ddf37f527ba51741ad33e9098c3b097200))  - (renovate[bot])
+
+## <!-- 9 -->⬆️ Upgrades
+
+- Upgraded from v1.1.4 -> v1.2.0
+ ([468d345](https://github.com/tj-actions/setup-bin/commit/468d3453035dea2c39b20232591100f1e316add1))  - (jackton1)
+
 # [1.2.0](https://github.com/tj-actions/setup-bin/compare/v1.1.4...v1.2.0) - (2023-08-24)
 
 ## <!-- 26 -->🔄 Update
