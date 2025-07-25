@@ -84,6 +84,10 @@ if [[ $OS == "darwin" ]]; then
       "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-apple-darwin.tar.gz"
       "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-apple-darwin.zip"
       "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-apple-darwin.zip"
+      # Fallback to x86_64
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.tar.gz"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.zip"
     )
   else
     patterns=(
@@ -110,6 +114,13 @@ elif [[ $OS == "linux" ]]; then
       "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-unknown-linux-musl.tar.xz"
       "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-unknown-linux-musl.tar.zst"
       "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-unknown-linux-musl.tar.zst"
+      # Fallback to x86_64
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.zst"
     )
   elif [[ $ARCH == "i686" || $ARCH == "i386" ]]; then
     patterns=(
@@ -119,6 +130,13 @@ elif [[ $OS == "linux" ]]; then
       "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-unknown-linux-musl.tar.xz"
       "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-unknown-linux-musl.tar.zst"
       "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-unknown-linux-musl.tar.zst"
+      # Fallback to x86_64
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.zst"
     )
   else
     echo "Unsupported architecture: $ARCH"
@@ -134,11 +152,17 @@ elif [[ $OS == *"mingw64"* ]]; then
     patterns=(
       "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-pc-windows-msvc.zip"
       "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-pc-windows-msvc.zip"
+      # Fallback to x86_64
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
     )
   elif [[ $ARCH == "i686" || $ARCH == "i386" ]]; then
     patterns=(
       "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-pc-windows-msvc.zip"
       "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-pc-windows-msvc.zip"
+      # Fallback to x86_64
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
     )
   else
     echo "Unsupported architecture: $ARCH"
