@@ -41,6 +41,7 @@ if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false" ]]; then
   NAME_VERSION="${VERSION#"v"}"
 fi
 
+echo "NAME VERSION: $NAME_VERSION"
 echo "VERSION: $VERSION"
 
 # Determine the operating system and architecture
@@ -299,10 +300,20 @@ elif [[ -f "$TMPDIR/$INPUT_REPOSITORY.exe" ]]; then
   BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY.exe"
 else
   # Look for any executable file in the extracted directory
-  BINARY_PATH=$(find "$TMPDIR" -maxdepth 1 -type f -executable | head -n 1)
-  if [[ -z "$BINARY_PATH" ]]; then
-    # If no executable found in root, look in subdirectories
-    BINARY_PATH=$(find "$TMPDIR" -type f -executable | head -n 1)
+  if [[ $OS == "darwin" ]]; then
+    # macOS compatible find command
+    BINARY_PATH=$(find "$TMPDIR" -maxdepth 1 -type f -perm +111 | head -n 1)
+    if [[ -z "$BINARY_PATH" ]]; then
+      # If no executable found in root, look in subdirectories
+      BINARY_PATH=$(find "$TMPDIR" -type f -perm +111 | head -n 1)
+    fi
+  else
+    # Linux and other systems
+    BINARY_PATH=$(find "$TMPDIR" -maxdepth 1 -type f -executable | head -n 1)
+    if [[ -z "$BINARY_PATH" ]]; then
+      # If no executable found in root, look in subdirectories
+      BINARY_PATH=$(find "$TMPDIR" -type f -executable | head -n 1)
+    fi
   fi
 fi
 
