@@ -34,7 +34,7 @@ if [ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" ] && ![ $VERSION =~ ^v[0-9]+$ ]; t
   VERSION="v$VERSION"
 fi
 
-if [ "$INPUT_ADD_PREFIX_TO_VERSION" == "false" ] && [[ $VERSION =~ ^v[0-9]+$ ]]; then
+if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false" ]]; then
   echo "Removing v from the version"
   VERSION="${VERSION#"v"}"
 fi
