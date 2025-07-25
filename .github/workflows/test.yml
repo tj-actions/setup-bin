@@ -43,14 +43,14 @@ jobs:
       - name: Show output
         run: |
           echo "setup-bin-rust: ${{ steps.setup-bin-rust.outputs.binary_path }}"
-      - name: Run git-cliff go package
-        id: setup-bin-go-2
+      - name: Run git-cliff rust package
+        id: setup-bin-rust-2
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository-owner: orhun
           repository: git-cliff
-          language-type: go
+          language-type: rust
       - name: Show output
         run: |
-          echo "setup-bin-go: ${{ steps.setup-bin-go-2.outputs.binary_path }}"
+          echo "setup-bin-go: ${{ steps.setup-bin-rust-2.outputs.binary_path }}"
