@@ -53,4 +53,4 @@ jobs:
           language-type: rust
       - name: Show output
         run: |
-          echo "setup-bin-go: ${{ steps.setup-bin-rust-2.outputs.binary_path }}"
+          echo "setup-bin-rust-2: ${{ steps.setup-bin-rust-2.outputs.binary_path }}"
