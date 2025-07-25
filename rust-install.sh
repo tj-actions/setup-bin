@@ -28,10 +28,16 @@ else
   VERSION="$INPUT_VERSION"
 fi
 
+echo "HAS_V_IN_VERSION: $HAS_V_IN_VERSION"
+echo "VERSION: $VERSION"
+echo "INPUT_ADD_PREFIX_TO_VERSION: $INPUT_ADD_PREFIX_TO_VERSION"
+
 ## Add v to the version if it doesn't have it
 if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true"  && "$HAS_V_IN_VERSION" == true && "$VERSION" != "v$VERSION" ]]; then
   VERSION="v$VERSION"
 fi
+
+echo "VERSION: $VERSION"
 
 # Determine the operating system and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
