@@ -25,6 +25,9 @@ NAME_VERSION="${VERSION#"v"}"
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 ARCH=$(uname -m)
 
+echo "OS: $OS"
+echo "ARCH: $ARCH"
+
 # Function to try downloading with different filename patterns
 function try_download {
     local base_url="https://github.com/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases/download/${VERSION}"
