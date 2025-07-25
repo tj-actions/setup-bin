@@ -4,6 +4,7 @@ set -eou pipefail
 
 TMPDIR=$(mktemp -d)
 INPUT_REPOSITORY=$(basename "$INPUT_REPOSITORY")
+INPUT_ADD_PREFIX_TO_VERSION=${INPUT_ADD_PREFIX_TO_VERSION:-true}
 HAS_V_IN_VERSION=false
 
 if [[ "$INPUT_VERSION" == "latest" ]]; then
@@ -29,7 +30,7 @@ else
 fi
 
 ## Add v to the version if it doesn't have it
-if [[ $HAS_V_IN_VERSION == true  && $VERSION != "v$VERSION" ]]; then
+if [[ $INPUT_ADD_PREFIX_TO_VERSION == true  && $HAS_V_IN_VERSION == true && $VERSION != "v$VERSION" ]]; then
   VERSION="v$VERSION"
 fi
 

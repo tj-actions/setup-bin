@@ -51,6 +51,7 @@ jobs:
           repository-owner: orhun
           repository: git-cliff
           language-type: rust
+          add-prefix-to-version: false
       - name: Show output
         run: |
           echo "setup-bin-rust-2: ${{ steps.setup-bin-rust-2.outputs.binary_path }}"
