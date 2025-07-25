@@ -291,10 +291,32 @@ else
   exit 1
 fi
 
-ls -la "$TMPDIR"
+# Try to find the binary with the repository name
+BINARY_PATH=""
+if [[ -f "$TMPDIR/$INPUT_REPOSITORY" ]]; then
+  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY"
+elif [[ -f "$TMPDIR/$INPUT_REPOSITORY.exe" ]]; then
+  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY.exe"
+else
+  # Look for any executable file in the extracted directory
+  BINARY_PATH=$(find "$TMPDIR" -maxdepth 1 -type f -executable | head -n 1)
+  if [[ -z "$BINARY_PATH" ]]; then
+    # If no executable found in root, look in subdirectories
+    BINARY_PATH=$(find "$TMPDIR" -type f -executable | head -n 1)
+  fi
+fi
+
+if [[ -z "$BINARY_PATH" ]]; then
+  echo "Error: Could not find executable binary after extraction"
+  echo "Contents of $TMPDIR:"
+  find "$TMPDIR" -type f
+  exit 1
+fi
+
+echo "Found binary: $BINARY_PATH"
 
 # Make the binary executable
-chmod +x "$TMPDIR"/"$INPUT_REPOSITORY"
+chmod +x "$BINARY_PATH"
 
 # Return the binary path
-echo "binary_path=$TMPDIR/$INPUT_REPOSITORY" >> "$GITHUB_OUTPUT"
+echo "binary_path=$BINARY_PATH" >> "$GITHUB_OUTPUT"
