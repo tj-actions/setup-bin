@@ -29,7 +29,7 @@ fi
 echo "VERSION: $VERSION"
 echo "INPUT_ADD_PREFIX_TO_VERSION: $INPUT_ADD_PREFIX_TO_VERSION"
 
-if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" ]] && ! [[ "$VERSION" =~ ^v[0-9]+$ ]]; then
+if [ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" ] && ![ "$VERSION" =~ ^v[0-9]+$ ]; then
   echo "Adding v to the version"
   VERSION="v$VERSION"
 fi
