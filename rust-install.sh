@@ -12,7 +12,14 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
 
   # If the version is in the format like "v3", find the latest semver
   if [[ $VERSION =~ ^v[0-9]+$ ]]; then
-    VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases" | jq -r '[.[] | .tag_name] | sort | reverse | .[0]')
+    # Get all releases and sort them semantically
+    VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases" | jq -r '
+      [.[] | .tag_name] | 
+      map(select(test("^v[0-9]"))) | 
+      sort_by(. | ltrimstr("v") | split(".") | map(tonumber? // 0)) | 
+      reverse | 
+      .[0]
+    ')
   fi
 else
   echo "Downloading version $INPUT_VERSION"
@@ -258,7 +265,12 @@ elif [[ $FILENAME == *.tar.gz ]]; then
 elif [[ $FILENAME == *.tar.xz ]]; then
   tar -xf "$OUTPUT_FILE" -C "$TMPDIR"
 elif [[ $FILENAME == *.tar.zst ]]; then
-  tar -xf "$OUTPUT_FILE" -C "$TMPDIR"
+  # Try tar with --zstd flag first, fallback to zstd pipe if not supported
+  if tar --help 2>&1 | grep -q -- --zstd; then
+    tar --zstd -xf "$OUTPUT_FILE" -C "$TMPDIR"
+  else
+    zstd -dc "$OUTPUT_FILE" | tar -xf - -C "$TMPDIR"
+  fi
 else
   echo "Unsupported file format: $FILENAME"
   exit 1
