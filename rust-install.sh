@@ -291,6 +291,8 @@ else
   exit 1
 fi
 
+ls -la "$TMPDIR"
+
 # Make the binary executable
 chmod +x "$TMPDIR"/"$INPUT_REPOSITORY"
 
