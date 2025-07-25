@@ -4,7 +4,6 @@ set -eou pipefail
 
 TMPDIR=$(mktemp -d)
 INPUT_REPOSITORY=$(basename "$INPUT_REPOSITORY")
-HAS_V_IN_VERSION=false
 
 if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
@@ -13,7 +12,6 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
 
   # If the version is in the format like "v3", find the latest semver
   if [[ $VERSION =~ ^v[0-9]+$ ]]; then
-    HAS_V_IN_VERSION=true
     # Get all releases and sort them semantically
     VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases" | jq -r '
       [.[] | .tag_name] | 
@@ -28,13 +26,9 @@ else
   VERSION="$INPUT_VERSION"
 fi
 
-if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true"  && "$HAS_V_IN_VERSION" == true && "$VERSION" != "v$VERSION" ]]; then
+if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" && "$VERSION" != "v$VERSION" ]]; then
   VERSION="v$VERSION"
-elif [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true"  && "$HAS_V_IN_VERSION" == false && "$VERSION" != "v$VERSION" ]]; then
-  VERSION="v$VERSION"
-elif [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false"  && "$HAS_V_IN_VERSION" == true && "$VERSION" == "v$VERSION" ]]; then
-  VERSION="${VERSION#"v"}"
-elif [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false"  && "$HAS_V_IN_VERSION" == false && "$VERSION" == "v$VERSION" ]]; then
+elif [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false" && "$VERSION" == "v$VERSION" ]]; then
   VERSION="${VERSION#"v"}"
 fi
 
