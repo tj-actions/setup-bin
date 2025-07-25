@@ -26,9 +26,6 @@ else
   VERSION="$INPUT_VERSION"
 fi
 
-echo "VERSION: $VERSION"
-echo "INPUT_ADD_PREFIX_TO_VERSION: $INPUT_ADD_PREFIX_TO_VERSION"
-
 if [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" && "$VERSION" != "v*" ]]; then
   VERSION="v$VERSION"
 elif [[ "$INPUT_ADD_PREFIX_TO_VERSION" == "false" && "$VERSION" == "v*" ]]; then
