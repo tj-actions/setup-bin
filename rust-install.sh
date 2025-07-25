@@ -4,6 +4,7 @@ set -eou pipefail
 
 TMPDIR=$(mktemp -d)
 INPUT_REPOSITORY=$(basename "$INPUT_REPOSITORY")
+HAS_V_IN_VERSION=false
 
 if [[ "$INPUT_VERSION" == "latest" ]]; then
   echo "Downloading the latest release"
@@ -12,6 +13,7 @@ if [[ "$INPUT_VERSION" == "latest" ]]; then
 
   # If the version is in the format like "v3", find the latest semver
   if [[ $VERSION =~ ^v[0-9]+$ ]]; then
+    HAS_V_IN_VERSION=true
     # Get all releases and sort them semantically
     VERSION=$(curl --silent -H "Authorization: token $INPUT_TOKEN" "https://api.github.com/repos/$INPUT_REPOSITORY_OWNER/$INPUT_REPOSITORY/releases" | jq -r '
       [.[] | .tag_name] | 
@@ -26,7 +28,10 @@ else
   VERSION="$INPUT_VERSION"
 fi
 
-NAME_VERSION="${VERSION#"v"}"
+## Add v to the version if it doesn't have it
+if [[ $HAS_V_IN_VERSION == true  && $VERSION != "v$VERSION" ]]; then
+  VERSION="v$VERSION"
+fi
 
 # Determine the operating system and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -88,62 +93,62 @@ function try_download {
 if [[ $OS == "darwin" ]]; then
   if [[ $ARCH == "arm64" || $ARCH == "aarch64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-apple-darwin.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-apple-darwin.zip"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-apple-darwin.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_aarch64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-apple-darwin.zip"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-apple-darwin.zip"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-apple-darwin.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-apple-darwin.zip"
     )
   else
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-apple-darwin.zip"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-apple-darwin.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-apple-darwin.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-apple-darwin.zip"
     )
   fi
 elif [[ $OS == "linux" ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.zst"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.zst"
     )
   elif [[ $ARCH == "aarch64" || $ARCH == "arm64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-unknown-linux-musl.tar.zst"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_aarch64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${VERSION}_aarch64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${VERSION}_aarch64-unknown-linux-musl.tar.zst"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.zst"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.zst"
     )
   elif [[ $ARCH == "i686" || $ARCH == "i386" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-unknown-linux-musl.tar.zst"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}-${VERSION}-i686-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_i686-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${VERSION}-i686-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${VERSION}_i686-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${VERSION}-i686-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${VERSION}_i686-unknown-linux-musl.tar.zst"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.gz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.xz"
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-unknown-linux-musl.tar.zst"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.gz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.xz"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-unknown-linux-musl.tar.zst"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-unknown-linux-musl.tar.zst"
     )
   else
     echo "Unsupported architecture: $ARCH"
@@ -152,24 +157,24 @@ elif [[ $OS == "linux" ]]; then
 elif [[ $OS == *"mingw64"* ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
     )
   elif [[ $ARCH == "aarch64" || $ARCH == "arm64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-pc-windows-msvc.zip"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-aarch64-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}_${VERSION}_aarch64-pc-windows-msvc.zip"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
     )
   elif [[ $ARCH == "i686" || $ARCH == "i386" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-pc-windows-msvc.zip"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-i686-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}_${VERSION}_i686-pc-windows-msvc.zip"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
     )
   else
     echo "Unsupported architecture: $ARCH"
