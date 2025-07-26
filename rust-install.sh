@@ -286,16 +286,34 @@ fi
 
 # Try to find the binary with the repository name
 BINARY_PATH=""
+
+# First, try to find the binary with the exact repository name
 if [[ -f "$TMPDIR/$INPUT_REPOSITORY" ]]; then
   BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY"
 elif [[ -f "$TMPDIR/$INPUT_REPOSITORY.exe" ]]; then
   BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY.exe"
 else
-  BINARY_PATH=$(ls -lR "$TMPDIR" | grep -v '^d' | grep -v "$INPUT_REPOSITORY" | head -n 1)
+  # Search recursively for the binary with repository name
+  if [[ $OS == "darwin" ]]; then
+    # macOS compatible find command
+    BINARY_PATH=$(find "$TMPDIR" -name "$INPUT_REPOSITORY" -type f -perm +111 | head -n 1)
+  else
+    # Linux and other systems
+    BINARY_PATH=$(find "$TMPDIR" -name "$INPUT_REPOSITORY" -type f -executable | head -n 1)
+  fi
+  
+  # If not found, try with .exe extension
+  if [[ -z "$BINARY_PATH" ]]; then
+    if [[ $OS == "darwin" ]]; then
+      BINARY_PATH=$(find "$TMPDIR" -name "$INPUT_REPOSITORY.exe" -type f -perm +111 | head -n 1)
+    else
+      BINARY_PATH=$(find "$TMPDIR" -name "$INPUT_REPOSITORY.exe" -type f -executable | head -n 1)
+    fi
+  fi
 fi
 
 if [[ -z "$BINARY_PATH" ]]; then
-  echo "Error: Could not find executable binary after extraction"
+  echo "Error: Could not find executable binary '$INPUT_REPOSITORY' after extraction"
   echo "Contents of $TMPDIR:"
   find "$TMPDIR" -type f
   exit 1
