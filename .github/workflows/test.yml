@@ -25,7 +25,7 @@ jobs:
         id: setup-bin-go
         uses: ./
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository-owner: tj-actions
           repository: auto-doc
           language-type: go
@@ -36,10 +36,22 @@ jobs:
         id: setup-bin-rust
         uses: ./
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           repository-owner: tj-actions
           repository: json2file
           language-type: rust
       - name: Show output
         run: |
           echo "setup-bin-rust: ${{ steps.setup-bin-rust.outputs.binary_path }}"
+      - name: Run git-cliff rust package
+        id: setup-bin-rust-2
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository-owner: orhun
+          repository: git-cliff
+          language-type: rust
+          add-prefix-to-version: false
+      - name: Show output
+        run: |
+          echo "setup-bin-rust-2: ${{ steps.setup-bin-rust-2.outputs.binary_path }}"
