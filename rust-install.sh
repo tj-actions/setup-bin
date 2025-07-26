@@ -168,24 +168,24 @@ elif [[ $OS == "linux" ]]; then
 elif [[ $OS == *"mingw64"* ]]; then
   if [[ $ARCH == "x86_64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
     )
   elif [[ $ARCH == "aarch64" || $ARCH == "arm64" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${VERSION}-aarch64-pc-windows-msvc.zip"
-      "${INPUT_REPOSITORY}_${VERSION}_aarch64-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-aarch64-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_aarch64-pc-windows-msvc.zip"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
     )
   elif [[ $ARCH == "i686" || $ARCH == "i386" ]]; then
     patterns=(
-      "${INPUT_REPOSITORY}-${VERSION}-i686-pc-windows-msvc.zip"
-      "${INPUT_REPOSITORY}_${VERSION}_i686-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-i686-pc-windows-msvc.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_i686-pc-windows-msvc.zip"
       # Fallback to x86_64
-      "${INPUT_REPOSITORY}-${VERSION}-x86_64-pc-windows-gnu.zip"
-      "${INPUT_REPOSITORY}_${VERSION}_x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}-${NAME_VERSION}-x86_64-pc-windows-gnu.zip"
+      "${INPUT_REPOSITORY}_${NAME_VERSION}_x86_64-pc-windows-gnu.zip"
     )
   else
     echo "Unsupported architecture: $ARCH"
