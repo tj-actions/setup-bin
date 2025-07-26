@@ -1,5 +1,9 @@
 name: Format README.md
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   push:
     branches:
@@ -15,6 +19,8 @@ jobs:
 
       - name: Run auto-doc
         uses: tj-actions/auto-doc@v3
+        with:
+          use_tag_commit_hash: true
 
       - name: Run remark
         uses: tj-actions/remark@v3
@@ -42,4 +48,4 @@ jobs:
           branch: "chore/update-readme"
           commit-message: "Updated README.md"
           body: "Updated README.md"
-          token: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
