@@ -33,11 +33,8 @@ NAME_VERSION="${VERSION#"v"}"
 
 if [ "$INPUT_ADD_PREFIX_TO_VERSION" == "true" ]; then
   echo "Adding v to the version"
-  NAME_VERSION="v$VERSION"
+  NAME_VERSION="v$NAME_VERSION"
 fi
-
-echo "NAME VERSION: $NAME_VERSION"
-echo "VERSION: $VERSION"
 
 # Determine the operating system and architecture
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
