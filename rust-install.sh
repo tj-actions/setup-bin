@@ -267,17 +267,17 @@ fi
 
 # Extract the binary in the temporary directory to a subdirectory named after the repository
 if [[ $FILENAME == *.zip ]]; then
-  unzip "$OUTPUT_FILE" -d "$TMPDIR/$INPUT_REPOSITORY"
+  unzip "$OUTPUT_FILE" -d "$TMPDIR"
 elif [[ $FILENAME == *.tar.gz ]]; then
-  tar -xzf "$OUTPUT_FILE" -C "$TMPDIR/$INPUT_REPOSITORY"
+  tar -xzf "$OUTPUT_FILE" -C "$TMPDIR"
 elif [[ $FILENAME == *.tar.xz ]]; then
-  tar -xf "$OUTPUT_FILE" -C "$TMPDIR/$INPUT_REPOSITORY"
+  tar -xf "$OUTPUT_FILE" -C "$TMPDIR"
 elif [[ $FILENAME == *.tar.zst ]]; then
   # Try tar with --zstd flag first, fallback to zstd pipe if not supported
   if tar --help 2>&1 | grep -q -- --zstd; then
-    tar --zstd -xf "$OUTPUT_FILE" -C "$TMPDIR/$INPUT_REPOSITORY"
+    tar --zstd -xf "$OUTPUT_FILE" -C "$TMPDIR"
   else
-    zstd -dc "$OUTPUT_FILE" | tar -xf - -C "$TMPDIR/$INPUT_REPOSITORY"
+    zstd -dc "$OUTPUT_FILE" | tar -xf - -C "$TMPDIR"
   fi
 else
   echo "Unsupported file format: $FILENAME"
@@ -286,12 +286,12 @@ fi
 
 # Try to find the binary with the repository name
 BINARY_PATH=""
-if [[ -f "$TMPDIR/$INPUT_REPOSITORY/$INPUT_REPOSITORY" ]]; then
-  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY/$INPUT_REPOSITORY"
-elif [[ -f "$TMPDIR/$INPUT_REPOSITORY/$INPUT_REPOSITORY.exe" ]]; then
-  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY/$INPUT_REPOSITORY.exe"
+if [[ -f "$TMPDIR/$INPUT_REPOSITORY" ]]; then
+  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY"
+elif [[ -f "$TMPDIR/$INPUT_REPOSITORY.exe" ]]; then
+  BINARY_PATH="$TMPDIR/$INPUT_REPOSITORY.exe"
 else
-  BINARY_PATH=$(ls -1 "$TMPDIR/$INPUT_REPOSITORY" | grep -v "$INPUT_REPOSITORY" | head -n 1)
+  BINARY_PATH=$(ls -lR "$TMPDIR" | grep -v '^d' | grep -v "$INPUT_REPOSITORY" | head -n 1)
 fi
 
 if [[ -z "$BINARY_PATH" ]]; then
